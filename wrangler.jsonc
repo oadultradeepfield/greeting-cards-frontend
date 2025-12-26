@@ -6,7 +6,4 @@
   "observability": {
     "enabled": true,
   },
-  "vars": {
-    "BACKEND_URL": "https://cards-api.phanuphats.com",
-  },
 }
