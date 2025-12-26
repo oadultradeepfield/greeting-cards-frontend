@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { Navigate, useParams } from "react-router-dom";
-import { type CardAPIResponse, CardAPIResponseSchema } from "../schema/card";
+import { GreetingCardDisplay } from "@/components/card/GreetingCardDisplay";
+import { LoadingSpinner } from "@/components/card/LoadingSpinner";
+import { type CardAPIResponse, CardAPIResponseSchema } from "@/schema/card";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -28,17 +30,16 @@ export default function CardPage() {
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingSpinner message="Loading card..." />;
   }
 
-  if (isError) {
-    return <Navigate to="/" replace />;
+  if (isError || !data) {
+    return <Navigate to="/" />;
   }
 
   return (
-    <div>
-      <h1>Card Data</h1>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+    <div className="flex min-h-screen items-center justify-center p-4">
+      <GreetingCardDisplay card={data.data} />
     </div>
   );
 }

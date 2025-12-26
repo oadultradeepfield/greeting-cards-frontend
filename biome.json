@@ -27,5 +27,10 @@
       "!**/cache",
       "!**/__generated__"
     ]
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
   }
 }
