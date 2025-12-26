@@ -6,18 +6,31 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 import type { Card as CardType } from "@/schema/card";
+import { AuroraText } from "../ui/aurora-text";
+import { ShineBorder } from "../ui/shine-border";
 import { MessageBlock } from "./MessageBlock";
 
 interface GreetingCardDisplayProps {
   card: CardType;
+  isBlurred?: boolean;
 }
 
-export function GreetingCardDisplay({ card }: GreetingCardDisplayProps) {
+export function GreetingCardDisplay({
+  card,
+  isBlurred = false,
+}: GreetingCardDisplayProps) {
   const OccasionIcon = card.occasion === "birthday" ? Cake : PartyPopper;
 
   return (
-    <Card className="w-full max-w-lg">
+    <Card
+      className={cn(
+        "w-full max-w-lg transition-all duration-700 ease-out",
+        isBlurred ? "blur-sm" : "blur-0",
+      )}
+    >
+      <ShineBorder shineColor={["#C4B5FD", "#FBCFE8", "#FDE68A"]} />
       <CardHeader>
         <div className="mb-2 flex items-center gap-2">
           <OccasionIcon className="text-muted-foreground h-5 w-5" />
@@ -25,7 +38,9 @@ export function GreetingCardDisplay({ card }: GreetingCardDisplayProps) {
             {card.occasion}
           </span>
         </div>
-        <CardTitle className="text-2xl">{card.title}</CardTitle>
+        <CardTitle className="text-2xl">
+          <AuroraText>{card.title}</AuroraText>
+        </CardTitle>
         <CardDescription className="flex flex-col gap-1 pt-2">
           <span className="flex items-center gap-2">
             <User className="h-4 w-4" />
@@ -39,7 +54,7 @@ export function GreetingCardDisplay({ card }: GreetingCardDisplayProps) {
       </CardHeader>
       <CardContent className="space-y-4">
         {card.thai_content && (
-          <MessageBlock label="ข้อความ" content={card.thai_content} />
+          <MessageBlock label="Thai Message" content={card.thai_content} />
         )}
         {card.english_content && (
           <MessageBlock label="Message" content={card.english_content} />
