@@ -18,7 +18,7 @@ async function fetchCard(id: string): Promise<CardAPIResponse> {
 export default function CardPage() {
   const { id } = useParams<{ id: string }>();
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isPending, isError } = useQuery({
     queryKey: ["card", id],
     queryFn: () => {
       if (!id) {
@@ -29,11 +29,11 @@ export default function CardPage() {
     enabled: !!id,
   });
 
-  if (isLoading) {
+  if (isPending) {
     return <LoadingSpinner message="Loading card..." />;
   }
 
-  if (isError || !data) {
+  if (isError) {
     return <Navigate to="/" />;
   }
 
