@@ -11,6 +11,7 @@ import type { Card as CardType } from "@/schema/card";
 import { AuroraText } from "../ui/aurora-text";
 import { ShineBorder } from "../ui/shine-border";
 import { MessageBlock } from "./MessageBlock";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 interface GreetingCardDisplayProps {
   card: CardType;
@@ -38,19 +39,29 @@ export function GreetingCardDisplay({
             {card.occasion}
           </span>
         </div>
-        <CardTitle className="text-2xl">
-          <AuroraText>{card.title}</AuroraText>
-        </CardTitle>
-        <CardDescription className="flex flex-col gap-1 pt-2">
-          <span className="flex items-center gap-2">
-            <User className="h-4 w-4" />
-            To: {card.recipient}
-          </span>
-          <span className="flex items-center gap-2">
-            <Send className="h-4 w-4" />
-            From: {card.sender}
-          </span>
-        </CardDescription>
+        <div className="flex items-center justify-between -my-6">
+          <div className="flex flex-col gap-2">
+            <CardTitle className="text-2xl">
+              <AuroraText>{card.title}</AuroraText>
+            </CardTitle>
+            <CardDescription className="flex flex-col gap-1 pt-2">
+              <span className="flex items-center gap-2">
+                <User className="h-4 w-4" />
+                To: {card.recipient}
+              </span>
+              <span className="flex items-center gap-2">
+                <Send className="h-4 w-4" />
+                From: {card.sender}
+              </span>
+            </CardDescription>
+          </div>
+          <DotLottieReact
+            src="/lottie/blue-working-cat.lottie"
+            loop
+            autoplay
+            className="h-36 w-36 shrink-0"
+          />
+        </div>
       </CardHeader>
       <CardContent className="space-y-4">
         {card.thai_content && (
