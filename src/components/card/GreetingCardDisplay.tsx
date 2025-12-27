@@ -1,3 +1,4 @@
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { Cake, PartyPopper, Send, User } from "lucide-react";
 import {
   Card,
@@ -11,7 +12,6 @@ import type { Card as CardType } from "@/schema/card";
 import { AuroraText } from "../ui/aurora-text";
 import { ShineBorder } from "../ui/shine-border";
 import { MessageBlock } from "./MessageBlock";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 interface GreetingCardDisplayProps {
   card: CardType;
