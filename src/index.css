@@ -1,6 +1,22 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@font-face {
+  font-family: "Line Seeds San TH";
+  src: url("fonts/LINESeedSansTH_W_Rg.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Line Seeds San TH";
+  src: url("fonts/LINESeedSansTH_W_Bd.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -153,6 +169,7 @@
     @apply border-border outline-ring/50;
   }
   body {
+    font-family: "Line Seeds San TH", sans-serif;
     @apply bg-background text-foreground;
   }
 }
