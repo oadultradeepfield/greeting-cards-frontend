@@ -1,69 +1,83 @@
-# React + TypeScript + Vite
+# Greeting Cards Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Modern, responsive greeting cards viewer built with [React](https://react.dev/) and [Vite](https://vitejs.dev/), deployed on [Cloudflare Pages](https://pages.cloudflare.com/).
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```mermaid
+flowchart LR
+    subgraph Client
+        UI[React App]
+    end
+    subgraph CDN
+        CF[Cloudflare Pages]
+    end
+    subgraph Backend
+        API[REST API]
+    end
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+    UI -->|fetch| API
+    CF -->|serves| UI
+    API -->|JSON| UI
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Prerequisites
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
+- [Node.js](https://nodejs.org/) v18+
+- [pnpm](https://pnpm.io/)
+- [Cloudflare account](https://dash.cloudflare.com/)
 
-export default tseslint.config([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs["recommended-typescript"],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+## Installation
+
+Install dependencies:
+
+```sh
+pnpm install
 ```
+
+## Configuration
+
+### Environment Variables
+
+Create a `.env` file from `.env.example` and set the following:
+
+| Variable           | Description                                                 |
+| ------------------ | ----------------------------------------------------------- |
+| `VITE_BACKEND_URL` | Backend API URL (e.g., `https://cards-api.phanuphats.com`). |
+
+**Note:** All environment variables must be prefixed with `VITE_` to be exposed to the client.
+
+## Development
+
+Start the local development server:
+
+```sh
+pnpm run dev
+```
+
+The app will be available at `http://localhost:5173`.
+
+## Deployment
+
+Deploy to Cloudflare Pages:
+
+### Option 1: Direct Deploy
+
+```sh
+pnpm run deploy
+```
+
+### Option 2: Git Integration
+
+1. Push your code to GitHub/GitLab
+2. Connect your repository in the [Cloudflare Pages dashboard](https://dash.cloudflare.com/)
+3. Configure build settings:
+   - **Build command:** `pnpm run build`
+   - **Build output directory:** `dist`
+   - **Environment variables:** Add `VITE_BACKEND_URL`
+
+Cloudflare Pages will automatically deploy on every push.
+
+## License
+
+[MIT](LICENSE)
