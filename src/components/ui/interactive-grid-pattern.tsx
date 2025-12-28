@@ -38,6 +38,7 @@ export function InteractiveGridPattern({
   const [hoveredSquare, setHoveredSquare] = useState<number | null>(null);
 
   return (
+    // biome-ignore lint: false positive - decorative SVG; title not required
     <svg
       width={width * horizontal}
       height={height * vertical}
@@ -47,7 +48,6 @@ export function InteractiveGridPattern({
       )}
       {...props}
     >
-      <title>Interactive Grid Pattern</title>
       {Array.from({ length: horizontal * vertical }).map((_, index) => {
         const x = (index % horizontal) * width;
         const y = Math.floor(index / horizontal) * height;
